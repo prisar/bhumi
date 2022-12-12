@@ -9,3 +9,5 @@ village within 5 kms from bangladesh border. it is 2 kms from a railway station 
 major railway stations includes radhikapur and kaliyaganj. These stations are connected with 
 major cities like Kolkata, Siliguri, Howrah, Delhi.
 
+there are lot of difficulties like infrastructure, supply, raw materials, etc. still i believe that most of 
+the challenges can be addressed and benifits can be ripped with projects operating here.
