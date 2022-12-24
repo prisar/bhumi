@@ -11,3 +11,6 @@ major cities like Kolkata, Siliguri, Howrah, Delhi.
 
 there are lot of difficulties like infrastructure, supply, raw materials, etc. still i believe that most of 
 the challenges can be addressed and benifits can be ripped with projects operating here.
+
+
+`showMap.js` file will halp hide the mauza map
