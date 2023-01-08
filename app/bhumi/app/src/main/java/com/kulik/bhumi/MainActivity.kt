@@ -108,7 +108,7 @@ fun Greeting(name: String) {
         )
 
         TableScreen()
-        
+
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
