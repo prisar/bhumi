@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kulik.bhumi.ui.theme.BhumiTheme
 import com.kulik.bhumi.ui.theme.Black
+import com.kulik.bhumi.ui.theme.Teal200
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,14 +101,14 @@ fun Greeting(name: String) {
     Column (verticalArrangement= Arrangement.SpaceBetween) {
         Text(
             text = "Land maps",
-            style = TextStyle( color = White,
+            style = TextStyle( color = Black,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
-                .border(2.dp, MaterialTheme.colors.secondary, shape)
-                .background(MaterialTheme.colors.primary, shape)
+                .border(2.dp, Black, shape)
+                .background(Teal200, shape)
                 .padding(16.dp)
                 .clickable(enabled = enabled) {
                     enabled = false
