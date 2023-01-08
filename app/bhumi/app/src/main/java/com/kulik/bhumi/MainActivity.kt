@@ -16,10 +16,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.kulik.bhumi.ui.theme.BhumiTheme
 
 class MainActivity : ComponentActivity() {
@@ -46,7 +48,7 @@ fun Greeting(name: String) {
 
     Column (verticalArrangement= Arrangement.SpaceBetween) {
         Text(
-            text = "The maps",
+            text = "Land maps",
             style = TextStyle( color = White,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center),
@@ -63,7 +65,12 @@ fun Greeting(name: String) {
                 .weight(1f, false)
 
         ) {
-            Text("Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.")
+            Text(text = " According to the West Bengal Land Reforms Act, one can buy a maximum of 24.5 acres of rainfed land and 17.5 acres of irrigated land",
+                fontSize = 16.sp,
+                fontFamily = FontFamily.SansSerif,
+                modifier = Modifier.fillMaxWidth()
+                    .padding(16.dp)
+                )
         }
 
     }
