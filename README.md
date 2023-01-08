@@ -12,5 +12,8 @@ major cities like Kolkata, Siliguri, Howrah, Delhi.
 there are lot of difficulties like infrastructure, supply, raw materials, etc. still i believe that most of 
 the challenges can be addressed and benifits can be ripped with projects operating here.
 
+save mauza map using chrome based browser from the bhumi website. then replace map script.
+`showMap.js` file will help in displaying mauza map. 10m scale map is best for saving. the map is 
+searchable by plot no.
 
-`showMap.js` file will halp hide the mauza map
+[<img src="https://cdn.rawgit.com/steverichey/google-play-badge-svg/master/img/bn_get.svg" width="50%">](https://play.google.com/store/apps/details?id=com.kulik.bhumi)
