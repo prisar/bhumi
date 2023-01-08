@@ -1,5 +1,6 @@
 package com.kulik.bhumi
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -66,7 +68,10 @@ fun TableScreen() {
     val column1Weight = .3f // 30%
     val column2Weight = .7f // 70%
     // The LazyColumn will be our table. Notice the use of the weights below
-    LazyColumn(Modifier.fillMaxSize().padding(16.dp)) {
+    LazyColumn(
+        Modifier
+            .fillMaxSize()
+            .padding(16.dp)) {
         // Here is the header
         item {
             Row(Modifier.background(Color.Gray)) {
@@ -90,20 +95,24 @@ fun Greeting(name: String) {
 //    Text(text = "Hello $name!")
     val shape = CircleShape
     var enabled = true
+    val context = LocalContext.current
+
     Column (verticalArrangement= Arrangement.SpaceBetween) {
         Text(
             text = "Land maps",
             style = TextStyle( color = White,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center),
-            modifier = Modifier.fillMaxWidth()
-                        .padding(16.dp)
-                        .border(2.dp, MaterialTheme.colors.secondary, shape)
-                        .background(MaterialTheme.colors.primary, shape)
-                        .padding(16.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .border(2.dp, MaterialTheme.colors.secondary, shape)
+                .background(MaterialTheme.colors.primary, shape)
+                .padding(16.dp)
                 .clickable(enabled = enabled) {
                     enabled = false
-//                    onClick()
+                    // onCLick()
+                    context.startActivity(Intent(context, LandActivity::class.java))
                 },
         )
 
@@ -118,7 +127,8 @@ fun Greeting(name: String) {
             Text(text = " According to the West Bengal Land Reforms Act, one can buy a maximum of 24.5 acres of rainfed land and 17.5 acres of irrigated land",
                 fontSize = 16.sp,
                 fontFamily = FontFamily.SansSerif,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .padding(16.dp)
                 )
         }
