@@ -80,9 +80,17 @@ fun RowScope.TableCell(
 
 @Composable
 fun CardWithShape() {
-    val paddingModifier = Modifier.padding(10.dp)
-    Card(shape = RoundedCornerShape(20.dp),elevation = 10.dp, modifier = paddingModifier) {
-        Text(text = "Round corner shape", modifier = paddingModifier)
+    val paddingModifier = Modifier.padding(5.dp)
+    val listData = listOf<String>("Raiganj", "Kaliyaganj", )
+
+    LazyColumn(modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally) {
+        items(listData) {
+            Card(shape = RoundedCornerShape(20.dp), elevation = 10.dp, modifier = paddingModifier) {
+                Text(text = it, modifier = Modifier.padding(12.dp))
+            }
+        }
     }
 }
 
@@ -126,7 +134,10 @@ fun TableScreen() {
 
 @Composable
 fun LargeCard(){
-    val cardModifier  = Modifier.padding(16.dp).fillMaxWidth().height(50.dp)
+    val cardModifier  = Modifier
+        .padding(16.dp)
+        .fillMaxWidth()
+        .height(50.dp)
     Card(elevation = 10.dp, modifier = cardModifier) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -149,7 +160,10 @@ fun LargeCard(){
                 ),
                 exit = slideOutVertically() + shrinkVertically() + fadeOut()
             ) {
-                Text("Hello", Modifier.fillMaxWidth().height(200.dp))
+                Text("Hello",
+                    Modifier
+                        .fillMaxWidth()
+                        .height(200.dp))
             }
         }
     }
