@@ -4,29 +4,47 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.*
+import androidx.compose.animation.core.calculateTargetValue
 import androidx.compose.foundation.*
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.gestures.horizontalDrag
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.input.pointer.consumePositionChange
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.input.pointer.positionChange
+import androidx.compose.ui.input.pointer.util.VelocityTracker
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kulik.bhumi.ui.theme.BhumiTheme
 import com.kulik.bhumi.ui.theme.Black
 import com.kulik.bhumi.ui.theme.Teal200
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlin.math.absoluteValue
+import kotlin.math.roundToInt
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +56,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    Greeting()
                 }
             }
         }
@@ -60,9 +78,17 @@ fun RowScope.TableCell(
 }
 
 @Composable
+fun CardWithShape() {
+    val paddingModifier = Modifier.padding(10.dp)
+    Card(shape = RoundedCornerShape(20.dp),elevation = 10.dp, modifier = paddingModifier) {
+        Text(text = "Round corner shape", modifier = paddingModifier)
+    }
+}
+
+@Composable
 fun TableScreen() {
     // Just a fake data... a Pair of Int and String
-    val tableData = (1..100).mapIndexed { index, item ->
+    val tableData = (1..5).mapIndexed { index, item ->
         index to "Item $index"
     }
     // Each cell of a column must have the same weight.
@@ -76,7 +102,7 @@ fun TableScreen() {
         // Here is the header
         item {
             Row(Modifier.background(Color.Gray)) {
-                TableCell(text = "Column 1", weight = column1Weight)
+                TableCell(text = "Column_1", weight = column1Weight)
                 TableCell(text = "Column 2", weight = column2Weight)
             }
         }
@@ -92,8 +118,120 @@ fun TableScreen() {
 }
 
 @Composable
-fun Greeting(name: String) {
-//    Text(text = "Hello $name!")
+fun LargeCard(){
+    val cardModifier  = Modifier.padding(16.dp).fillMaxWidth().height(50.dp)
+    Card(elevation = 10.dp, modifier = cardModifier) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            var visible by remember { mutableStateOf(true) }
+            val density = LocalDensity.current
+            AnimatedVisibility(
+                visible = visible,
+                enter = slideInVertically {
+                    // Slide in from 40 dp from the top.
+                    with(density) { -40.dp.roundToPx() }
+                } + expandVertically(
+                    // Expand from the top.
+                    expandFrom = Alignment.Top
+                ) + fadeIn(
+                    // Fade in with the initial alpha of 0.3f.
+                    initialAlpha = 0.3f
+                ),
+                exit = slideOutVertically() + shrinkVertically() + fadeOut()
+            ) {
+                Text("Hello", Modifier.fillMaxWidth().height(200.dp))
+            }
+        }
+    }
+}
+
+@Composable
+fun Demo8() {
+    Text(text = "滑动删除",
+        modifier = Modifier
+            .swipeToDismiss { }
+            .fillMaxWidth()
+            .height(50.dp)
+            .background(Color.LightGray)
+            //文字竖直居中
+            .wrapContentHeight(Alignment.CenterVertically)
+    )
+}
+
+fun Modifier.swipeToDismiss(onDismissed: () -> Unit): Modifier = composed {
+    composed {
+        //水平位移
+        val offsetX = remember {
+            androidx.compose.animation.core.Animatable(0f)
+        }
+        //使用 pointerInput 修饰符，可以获取对传入指针触摸事件的低级别访问，并跟踪用户使用同一指针拖动的速度。
+        pointerInput(Unit) {
+            //衰减动画，用于计算滑动动画的最终停止位置
+            val decay = splineBasedDecay<Float>(this)
+            //开启协程监听触摸事件
+            coroutineScope {
+                //使用while (true)一直监听触摸事件
+                while (true) {
+                    //等待触摸按下事件
+                    //awaitPointerEventScope：挂起并安装指针输入块，该块可以等待输入事件并立即响应它们
+                    //awaitFirstDown：第一个down事件
+                    val pointerId = awaitPointerEventScope {
+                        awaitFirstDown().id
+                    }
+                    //如果动画当前正在运行，我们应将其拦截。可以通过对 Animatable 调用 stop 来实现此目的。
+                    // 请注意，如果动画未运行，系统会忽略该调用。VelocityTracker 用于计算用户从左向右移动的速度。
+                    offsetX.stop()
+                    val velocityTracker = VelocityTracker()
+                    //等待拖动事件
+                    awaitPointerEventScope {
+                        //监听水平滑动
+                        horizontalDrag(pointerId) { change ->
+                            val horizontalDragOffset = offsetX.value + change.positionChange().x
+                            //只能在另一个 launch 代码块内发起对 snapTo 的调用，
+                            // 因为 awaitPointerEventScope 和 horizontalDrag 是受限的协程范围。
+                            // 也就是说，它们只能对 awaitPointerEvents 执行 suspend，而 snapTo 并不是指针事件。
+                            launch {
+                                offsetX.snapTo(horizontalDragOffset)
+                            }
+                            //记录下时间和位置就可以计算出速度
+                            velocityTracker.addPosition(change.uptimeMillis, change.position)
+                            //消费掉手势事件，而不是传递给外部
+                            change.consumePositionChange()
+                        }
+                    }
+                    //滑动事件结束，计算滑动速度
+                    val velocity = velocityTracker.calculateVelocity().x
+                    //计算最终停止位置
+                    val targetOffsetX = decay.calculateTargetValue(offsetX.value, velocity)
+                    //给动画设置边界
+                    offsetX.updateBounds(
+                        lowerBound = -size.width.toFloat(),
+                        upperBound = size.width.toFloat()
+                    )
+                    launch {
+                        if (targetOffsetX.absoluteValue <= size.width) {
+                            //返回原位
+                            offsetX.animateTo(targetValue = 0f, initialVelocity = velocity)
+                        } else {
+                            //使用衰减动画直到滑动边界
+                            offsetX.animateDecay(velocity, decay)
+                            onDismissed()
+                        }
+                    }
+                }
+            }
+        }
+            //应用水平位移给元素
+            .offset { IntOffset(offsetX.value.roundToInt(), 0) }
+    }
+}
+
+
+@Composable
+fun Greeting() {
     val shape = CircleShape
     var enabled = true
     val context = LocalContext.current
@@ -117,7 +255,13 @@ fun Greeting(name: String) {
                 },
         )
 
-        TableScreen()
+        Demo8()
+
+        CardWithShape()
+
+        LargeCard()
+
+//        TableScreen()
 
         Column(
             modifier = Modifier
@@ -141,6 +285,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     BhumiTheme {
-        Greeting("Android")
+        Greeting()
     }
 }

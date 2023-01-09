@@ -32,6 +32,7 @@ class LandActivity : ComponentActivity() {
 @Composable
 fun LandDetails() {
     Text(text = "Land details")
+
 }
 
 @Preview(showBackground = true)
