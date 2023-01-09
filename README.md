@@ -16,4 +16,8 @@ save mauza map using chrome based browser from the bhumi website. then replace m
 `showMap.js` file will help in displaying mauza map. 10m scale map is best for saving. the map is 
 searchable by plot no.
 
+### app
+
+ the app is uploaded in playstore for guide and information. it is very basic now, some work in still in progress which will be uploaded later.
+
 [<img src="https://cdn.rawgit.com/steverichey/google-play-badge-svg/master/img/bn_get.svg" width="50%">](https://play.google.com/store/apps/details?id=com.kulik.bhumi)
