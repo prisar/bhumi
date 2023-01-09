@@ -443,13 +443,15 @@ fun Greeting() {
                 },
         )
 
-        Demo7()
+//        Demo7()
 
         CardWithShape()
 
-        LargeCard()
+//        LargeCard()
 
 //        TableScreen()
+
+
 
         Column(
             modifier = Modifier
