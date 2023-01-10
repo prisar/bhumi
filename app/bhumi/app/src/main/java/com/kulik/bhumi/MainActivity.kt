@@ -453,7 +453,7 @@ fun Greeting() {
                 .clickable(enabled = enabled) {
                     enabled = false
                     // onCLick()
-                    context.startActivity(Intent(context, LandActivity::class.java))
+                    context.startActivity(Intent(context, MapActivity::class.java))
                 },
         )
 
