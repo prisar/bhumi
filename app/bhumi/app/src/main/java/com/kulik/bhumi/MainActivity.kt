@@ -78,10 +78,30 @@ fun RowScope.TableCell(
     )
 }
 
+class Mouza(name: String, code: String, sheets: List<String>) {
+    val name = name
+    val code = code
+    val sheets = sheets
+}
+
+/*
+* https://twitter.com/RodrigoMartinD/status/1577719043720626178?s=20&t=5w19yA6WVrPaXI4-fIs-PA
+*
+ */
 @Composable
 fun CardWithShape() {
     val paddingModifier = Modifier.padding(5.dp)
-    val listData = listOf<String>("madhupur_109", "basudebpur_115", "bhoria_118", "marikura_144","rupahar_202", "sankarpur_113")
+    val listData = listOf<Mouza>(
+        Mouza("madhupur_109", "109", sheets = listOf<String>("0")),
+        Mouza("basudebpur_115", "115", sheets = listOf<String>("0")),
+        Mouza("bhoria_118", "118", sheets = listOf<String>("0")),
+        Mouza("marikura_144", "144", sheets = listOf<String>("0")),
+        Mouza("rupahar_202", "202", sheets = listOf<String>("0")),
+        Mouza("sankarpur_113", "113", sheets = listOf<String>("0")),
+        Mouza("ekore_110", "110", sheets = listOf<String>("1", "2")),
+        Mouza("raiganj_150", "150", sheets = listOf<String>("01", "02", "03")),
+        Mouza("tenohari_143", "143", sheets = listOf<String>("1", "2")),
+    )
     val context = LocalContext.current
 
     LazyColumn(modifier = Modifier.fillMaxWidth(),
@@ -89,8 +109,12 @@ fun CardWithShape() {
         horizontalAlignment = Alignment.CenterHorizontally) {
         items(listData) {
             Card(shape = RoundedCornerShape(20.dp), elevation = 10.dp, modifier = paddingModifier) {
-                Text(text = it, modifier = Modifier.padding(12.dp).clickable() {
-                    context.startActivity(Intent(context, MapActivity::class.java).putExtra("url", "https://agrohikulik.web.app/raiganj_06/${it}/MouzaMap.html"))
+                Text(text = it.name, modifier = Modifier.padding(12.dp).clickable() {
+                    if (it.sheets.size > 1) {
+                        context.startActivity(Intent(context, MapActivity::class.java).putExtra("url", "https://agrohikulik.web.app/raiganj_06/${it.name}/${it.sheets[0]}/MouzaMap.html"))
+                    } else {
+                         context.startActivity(Intent(context, MapActivity::class.java).putExtra("url", "https://agrohikulik.web.app/raiganj_06/${it.name}/MouzaMap.html"))
+                    }
                 })
             }
         }
