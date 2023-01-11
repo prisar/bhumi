@@ -10,7 +10,9 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.horizontalDrag
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -88,6 +90,7 @@ class Mouza(name: String, code: String, sheets: List<String>) {
 * https://twitter.com/RodrigoMartinD/status/1577719043720626178?s=20&t=5w19yA6WVrPaXI4-fIs-PA
 *
  */
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CardWithShape() {
     val paddingModifier = Modifier.padding(5.dp)
@@ -104,9 +107,7 @@ fun CardWithShape() {
     )
     val context = LocalContext.current
 
-    LazyColumn(modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally) {
+    LazyVerticalGrid(GridCells.Adaptive(minSize = 100.dp)) {
         items(listData) {
             Card(shape = RoundedCornerShape(20.dp), elevation = 10.dp, modifier = paddingModifier) {
                 Text(text = it.name, modifier = Modifier.padding(12.dp).clickable() {
@@ -486,19 +487,11 @@ fun Greeting() {
 
         CardWithShape()
 
-        Demo7()
+//        Demo7()
 //        LargeCard()
 
 //        TableScreen()
 
-
-
-        Column(
-            modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .weight(1f, false)
-
-        ) {
             Text(text = " According to the West Bengal Land Reforms Act, one can buy a maximum of 24.5 acres of rainfed land and 17.5 acres of irrigated land",
                 fontSize = 16.sp,
                 fontFamily = FontFamily.SansSerif,
@@ -506,8 +499,6 @@ fun Greeting() {
                     .fillMaxWidth()
                     .padding(16.dp)
                 )
-        }
-
     }
 }
 
