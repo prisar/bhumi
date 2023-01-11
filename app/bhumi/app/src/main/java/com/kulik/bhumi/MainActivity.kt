@@ -16,17 +16,13 @@ import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.input.pointer.consumePositionChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
@@ -44,6 +40,7 @@ import androidx.compose.ui.unit.sp
 import com.kulik.bhumi.ui.theme.BhumiTheme
 import com.kulik.bhumi.ui.theme.Black
 import com.kulik.bhumi.ui.theme.Teal200
+import com.kulik.bhumi.ui.theme.Yellow
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
@@ -107,16 +104,76 @@ fun CardWithShape() {
     )
     val context = LocalContext.current
 
-    LazyVerticalGrid(GridCells.Adaptive(minSize = 100.dp)) {
-        items(listData) {
-            Card(shape = RoundedCornerShape(20.dp), elevation = 10.dp, modifier = paddingModifier) {
-                Text(text = it.name, modifier = Modifier.padding(12.dp).clickable() {
-                    if (it.sheets.size > 1) {
-                        context.startActivity(Intent(context, MapActivity::class.java).putExtra("url", "https://agrohikulik.web.app/raiganj_06/${it.name}/${it.sheets[0]}/MouzaMap.html"))
-                    } else {
-                         context.startActivity(Intent(context, MapActivity::class.java).putExtra("url", "https://agrohikulik.web.app/raiganj_06/${it.name}/MouzaMap.html"))
+    val openDialog = remember { mutableStateOf(false) }
+    var alerttext by remember { mutableStateOf("") }
+    var dialogMouza by remember {
+        mutableStateOf(Mouza("", "", listOf()))
+    }
+
+    if (openDialog.value) {
+        AlertDialog(
+            onDismissRequest = {
+                openDialog.value = false
+            },
+            title = {
+                Text(text = "Select a sheet out of these ${dialogMouza.sheets.size}")
+            },
+            text = {
+                LazyVerticalGrid(cells = GridCells.Fixed(4),) {
+                    items(dialogMouza.sheets) {
+                        Card(shape = RoundedCornerShape(20.dp),
+                            elevation = 10.dp,
+                            backgroundColor = Yellow,
+                            modifier = paddingModifier.clickable() {
+                                context.startActivity(Intent(context, MapActivity::class.java).putExtra("url", "https://agrohikulik.web.app/raiganj_06/${dialogMouza.name}/${it}/MouzaMap.html"))
+                                openDialog.value = false
+                            }) {
+                            Text(text = it,
+                                style = TextStyle( color = Black,
+                                    fontWeight = FontWeight.Bold,
+                                    textAlign = TextAlign.Center),
+                                modifier = Modifier.padding(12.dp))
+
+                        }
                     }
-                })
+                }
+            },
+            buttons = {
+                Row(
+                    modifier = Modifier.padding(all = 8.dp),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Button(
+                        modifier = Modifier.fillMaxWidth(),
+                        onClick = { openDialog.value = false }
+                    ) {
+                        Text("Dismiss")
+                    }
+                }
+            }
+        )
+    }
+
+    LazyVerticalGrid(cells = GridCells.Fixed(2),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+        items(listData) {
+            Card(shape = RoundedCornerShape(20.dp),
+                elevation = 10.dp,
+                backgroundColor = Yellow,
+                modifier = paddingModifier.clickable() {
+                    if (it.sheets.size > 1) {
+                        openDialog.value = true
+                        dialogMouza = it
+                    } else {
+                        context.startActivity(Intent(context, MapActivity::class.java).putExtra("url", "https://agrohikulik.web.app/raiganj_06/${it.name}/MouzaMap.html"))
+                    }
+            }) {
+                Text(text = it.name,
+                    style = TextStyle( color = Black,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center),
+                    modifier = Modifier.padding(12.dp))
             }
         }
     }
@@ -481,7 +538,12 @@ fun Greeting() {
                 .clickable(enabled = enabled) {
                     enabled = false
                     // onCLick()
-                    context.startActivity(Intent(context, LandActivity::class.java).putExtra("url", "https://agrohikulik.web.app/raiganj_06/basudebpur_115/MouzaMap.html"))
+                    context.startActivity(
+                        Intent(context, LandActivity::class.java).putExtra(
+                            "url",
+                            "https://agrohikulik.web.app/raiganj_06/basudebpur_115/MouzaMap.html"
+                        )
+                    )
                 },
         )
 
