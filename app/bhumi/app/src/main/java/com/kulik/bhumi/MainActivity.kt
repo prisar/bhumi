@@ -81,14 +81,17 @@ fun RowScope.TableCell(
 @Composable
 fun CardWithShape() {
     val paddingModifier = Modifier.padding(5.dp)
-    val listData = listOf<String>("Raiganj", "Kaliyaganj", )
+    val listData = listOf<String>("madhupur_109", "basudebpur_115", "bhoria_118", "marikura_144","rupahar_202", "sankarpur_113")
+    val context = LocalContext.current
 
     LazyColumn(modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
         items(listData) {
             Card(shape = RoundedCornerShape(20.dp), elevation = 10.dp, modifier = paddingModifier) {
-                Text(text = it, modifier = Modifier.padding(12.dp))
+                Text(text = it, modifier = Modifier.padding(12.dp).clickable() {
+                    context.startActivity(Intent(context, MapActivity::class.java).putExtra("url", "https://agrohikulik.web.app/raiganj_06/${it}/MouzaMap.html"))
+                })
             }
         }
     }
@@ -421,9 +424,9 @@ fun Demo7() {
     )
     val background = if (change) Color.Gray else Color.Blue
     Column(modifier = Modifier.fillMaxWidth()) {
-        Text(text = "点击改变内容大小", modifier = Modifier.clickable { change = !change })
+        Text(text = "Kaliyaganj", modifier = Modifier.clickable { change = !change })
         Text(
-            text = "背景颜色：${background}",
+            text = "coming soon",
             modifier = Modifier
                 .size(100.dp)
                 .alpha(alpha)
@@ -440,7 +443,7 @@ fun Greeting() {
 
     Column (verticalArrangement= Arrangement.SpaceBetween) {
         Text(
-            text = "Land maps",
+            text = "Raiganj map",
             style = TextStyle( color = Black,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center),
@@ -453,14 +456,13 @@ fun Greeting() {
                 .clickable(enabled = enabled) {
                     enabled = false
                     // onCLick()
-                    context.startActivity(Intent(context, MapActivity::class.java))
+                    context.startActivity(Intent(context, LandActivity::class.java).putExtra("url", "https://agrohikulik.web.app/raiganj_06/basudebpur_115/MouzaMap.html"))
                 },
         )
 
-//        Demo7()
-
         CardWithShape()
 
+        Demo7()
 //        LargeCard()
 
 //        TableScreen()

@@ -1,5 +1,7 @@
 package com.kulik.bhumi
 
+import android.content.Intent
+import android.content.Intent.getIntent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.ViewGroup
@@ -15,6 +17,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
 import com.kulik.bhumi.ui.theme.BhumiTheme
@@ -22,6 +25,9 @@ import com.kulik.bhumi.ui.theme.BhumiTheme
 class MapActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val intent = intent
+        val url = intent.getStringExtra("url").toString()
+
         setContent {
             BhumiTheme {
                 // A surface container using the 'background' color from the theme
@@ -29,7 +35,7 @@ class MapActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting2("Android")
+                    MapDisplay(url)
                 }
             }
         }
@@ -37,9 +43,7 @@ class MapActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting2(name: String) {
-    Text(text = "Hello $name!")
-    val url = "http://192.168.43.17:8080/MouzaMap.html"
+fun MapDisplay(url: String) {
     var backEnabled by remember { mutableStateOf(false) }
     var webView: WebView? = null
     AndroidView(
@@ -68,11 +72,11 @@ fun Greeting2(name: String) {
         webView?.goBack()
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview2() {
-    BhumiTheme {
-        Greeting2("Android")
-    }
-}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun DefaultPreview2() {
+//    BhumiTheme {
+//        MapDisplay("Android")
+//    }
+//}

@@ -11,8 +11,8 @@ android {
         applicationId "com.kulik.bhumi"
         minSdk 21
         targetSdk 33
-        versionCode 91
-        versionName "1.3.91"
+        versionCode 92
+        versionName "1.3.92"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
