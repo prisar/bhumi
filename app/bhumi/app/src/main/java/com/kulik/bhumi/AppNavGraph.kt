@@ -20,7 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 
 sealed class Screen(val route: String, @StringRes val resourceId: Int) {
-    object About : Screen("profile", R.string.about)
+    object About : Screen("about", R.string.about)
     object Main : Screen("main", R.string.main)
 }
 
@@ -30,8 +30,8 @@ fun AppNavGraph(
 ) {
 
     val items = listOf(
-        Screen.About,
         Screen.Main,
+        Screen.About,
     )
 
     val navController = rememberNavController()
@@ -65,14 +65,27 @@ fun AppNavGraph(
             }
         }
     ) { innerPadding ->
-        NavHost(navController, startDestination = Screen.About.route, Modifier.padding(innerPadding)) {
-            composable(Screen.About.route) { AboutActivity() }
-            composable(Screen.Main.route) {  }
+        NavHost(navController, startDestination = Screen.Main.route, Modifier.padding(innerPadding)) {
+            composable(Screen.Main.route) { Home()  }
+            composable(Screen.About.route) { AboutScreen(
+                onNavigateToAbout = { navController.navigate("About") },
+                /*...*/
+            ) }
+
         }
     }
 }
 
+@Composable
+fun AboutScreen(
+    onNavigateToAbout: () -> Unit,
+    /*...*/
+) {
+    /*...*/
+    About()
+}
+
 object Destinations {
-    const val BASICS_START = "About"
+    const val BASICS_START = "Main"
 }
 

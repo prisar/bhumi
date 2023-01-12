@@ -30,7 +30,7 @@ class AboutActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    About()
                 }
             }
         }
@@ -39,7 +39,7 @@ class AboutActivity : ComponentActivity() {
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun Greeting(name: String) {
+fun About() {
     val context = LocalContext.current
 
     Column (verticalArrangement= Arrangement.SpaceBetween) {
@@ -94,6 +94,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview2() {
     BhumiTheme {
-        Greeting("Android")
+        About()
     }
 }
