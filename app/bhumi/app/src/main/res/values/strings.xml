@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">bhumi</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="about">About</string>
+    <string name="main">Main</string>
 </resources>
