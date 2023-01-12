@@ -194,7 +194,7 @@ fun MouzaCards2() {
         Mouza("araji_joydebpur_76", "150", sheets = listOf<String>("0")),
         Mouza("laxmipur_27", "143", sheets = listOf<String>("0")),
         Mouza("uttar_gouripur_64", "143", sheets = listOf<String>("0")),
-        Mouza("bochadanga_131", "143", sheets = listOf<String>("1", "2")),
+        Mouza("bochadanga_131", "143", sheets = listOf<String>("0")),
         Mouza("doulatbati_26", "143", sheets = listOf<String>("0")),
         Mouza("dalimgaon_31", "143", sheets = listOf<String>("1", "2")),
         Mouza("chaklaxmi_32", "143", sheets = listOf<String>("0")),
@@ -287,7 +287,7 @@ fun MouzaCards2() {
                         openDialog.value = true
                         dialogMouza = it
                     } else {
-                        context.startActivity(Intent(context, MapActivity::class.java).putExtra("url", "https://agrohikulik.web.app/raiganj_06/${it.name}/MouzaMap.html"))
+                        context.startActivity(Intent(context, MapActivity::class.java).putExtra("url", "https://agrohikulik.web.app/kaliyaganj_18/${it.name}/MouzaMap.html"))
                     }
                 }) {
                 Text(text = it.name,
