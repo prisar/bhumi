@@ -226,7 +226,6 @@ fun MouzaCards2() {
     val context = LocalContext.current
 
     val openDialog = remember { mutableStateOf(false) }
-    var alerttext by remember { mutableStateOf("") }
     var dialogMouza by remember {
         mutableStateOf(Mouza("", "", listOf()))
     }
@@ -300,37 +299,6 @@ fun MouzaCards2() {
     }
 }
 
-@Composable
-fun TableScreen() {
-    // Just a fake data... a Pair of Int and String
-    val tableData = (1..5).mapIndexed { index, item ->
-        index to "Item $index"
-    }
-    // Each cell of a column must have the same weight.
-    val column1Weight = .3f // 30%
-    val column2Weight = .7f // 70%
-    // The LazyColumn will be our table. Notice the use of the weights below
-    LazyColumn(
-        Modifier
-            .fillMaxSize()
-            .padding(16.dp)) {
-        // Here is the header
-        item {
-            Row(Modifier.background(Color.Gray)) {
-                TableCell(text = "Column_1", weight = column1Weight)
-                TableCell(text = "Column 2", weight = column2Weight)
-            }
-        }
-        // Here are all the lines of your table.
-        items(tableData) {
-            val (id, text) = it
-            Row(Modifier.fillMaxWidth()) {
-                TableCell(text = id.toString(), weight = column1Weight)
-                TableCell(text = text, weight = column2Weight)
-            }
-        }
-    }
-}
 
 /*
 * blog
@@ -375,19 +343,11 @@ fun LargeCard(){
     }
 }
 
-@Composable
-fun Demo8() {
-    Text(text = "滑动删除",
-        modifier = Modifier
-            .swipeToDismiss { }
-            .fillMaxWidth()
-            .height(50.dp)
-            .background(Color.LightGray)
-            //文字竖直居中
-            .wrapContentHeight(Alignment.CenterVertically)
-    )
-}
 
+/*
+ * code from
+ * https://github.com/yaoxiawen/ComposeAnimationDemo/blob/master/app/src/main/java/com/example/composeanimationdemo/Demo1.kt
+*/
 fun Modifier.swipeToDismiss(onDismissed: () -> Unit): Modifier = composed {
     composed {
         //水平位移
@@ -456,187 +416,6 @@ fun Modifier.swipeToDismiss(onDismissed: () -> Unit): Modifier = composed {
     }
 }
 
-/*
- * code from
- * https://github.com/yaoxiawen/ComposeAnimationDemo/blob/master/app/src/main/java/com/example/composeanimationdemo/Demo1.kt
-*/
-
-@Composable
-fun Demo1() {
-    var change by remember { mutableStateOf(false) }
-    val background by animateColorAsState(if (change) Color.Gray else Color.Blue)
-//    val background = if (change) Color.Gray else Color.Blue
-    Column {
-        Text(
-            text = "背景颜色：${background}",
-            modifier = Modifier
-                .size(100.dp)
-                .background(background),
-        )
-        Text(text = "点击变换颜色", modifier = Modifier.clickable { change = !change })
-    }
-}
-
-@Composable
-fun Demo2() {
-    var change by remember { mutableStateOf(false) }
-    val background = Color.Gray
-    Column {
-        AnimatedVisibility(visible = change) {
-            Text(
-                text = "背景颜色：${background}",
-                modifier = Modifier
-                    .size(100.dp)
-                    .background(background),
-            )
-        }
-        Text(text = "点击改变可见性", modifier = Modifier.clickable { change = !change })
-    }
-}
-
-@Composable
-fun Demo3() {
-    var change by remember { mutableStateOf(false) }
-    val background = Color.Gray
-    Column {
-        AnimatedVisibility(
-            visible = change,
-            enter = slideInVertically(
-                initialOffsetY = { fullHeight -> -fullHeight },
-                //LinearOutSlowInEasing:传入元素使用减速缓和设置动画，减速缓和以峰值速度（元素移动的最快点）开始过渡，并在静止时结束
-                animationSpec = tween(durationMillis = 150, easing = LinearOutSlowInEasing)
-            ),
-            exit = slideOutVertically(
-                targetOffsetY = { fullHeight -> -fullHeight },
-                //FastOutSlowInEasing:退出屏幕的元素使用加速度缓和，从静止开始，以峰值速度结束
-                animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing)
-            )
-        ) {
-            Text(
-                text = "背景颜色：${background}",
-                modifier = Modifier
-                    .size(100.dp)
-                    .background(background),
-            )
-        }
-        Text(text = "点击改变可见性", modifier = Modifier.clickable { change = !change })
-    }
-}
-
-/**
- * 内容大小动画, animateContentSize
- */
-@Composable
-fun Demo4() {
-    var change by remember { mutableStateOf(false) }
-    val background = Color.Gray
-    Column(modifier = Modifier.animateContentSize()) {
-        Text(text = "点击改变内容大小", modifier = Modifier.clickable { change = !change })
-        if (change) {
-            Text(
-                text = "背景颜色：${background}",
-                modifier = Modifier
-                    .size(100.dp)
-                    .background(background),
-            )
-        }
-    }
-}
-
-/**
- * 多值动画, updateTransition，当状态发生改变时，有多个动画值要一起发生改变
- * 设置一个Transition，并使用targetState提供的目标对其进行更新。
- * 当targetState更改时，Transition将朝着新targetState指定的目标值运行其所有子动画
- * 可以使用Transition动态添加子动画：Transition.animateFloat、animateColor、animateValue等
- */
-@Composable
-fun Demo5() {
-    var change by remember { mutableStateOf(false) }
-    val transition = updateTransition(targetState = change, label = "多值动画")
-    val offset by transition.animateDp(label = "") { change ->
-        if (change) 50.dp else 0.dp
-    }
-    val background by transition.animateColor(label = "") { change ->
-        if (change) Color.Gray else Color.Blue
-    }
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Text(text = "点击改变内容大小", modifier = Modifier.clickable { change = !change })
-        Text(
-            text = "背景颜色：${background}",
-            modifier = Modifier
-                .size(100.dp)
-                .offset(x = offset)
-                .background(background),
-        )
-    }
-}
-
-/**
- * 多值动画, updateTransition，当状态发生改变时，有多个动画值要一起发生改变
- * 弹性效果，transitionSpec
- */
-@Composable
-fun Demo6() {
-    var change by remember { mutableStateOf(false) }
-    val transition = updateTransition(targetState = change, label = "多值动画")
-    val offset by transition.animateDp(
-        transitionSpec = {
-            //从左往右，左边缘比右边缘移动得慢
-            if (!change isTransitioningTo change) {
-                spring(stiffness = Spring.StiffnessVeryLow)
-            } else {
-                spring(stiffness = Spring.StiffnessMedium)
-            }
-        },
-        label = ""
-    ) { change ->
-        if (change) 50.dp else 0.dp
-    }
-    val background by transition.animateColor(label = "") { change ->
-        if (change) Color.Gray else Color.Blue
-    }
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Text(text = "点击改变内容大小", modifier = Modifier.clickable { change = !change })
-        Text(
-            text = "背景颜色：${background}",
-            modifier = Modifier
-                .size(100.dp)
-                .offset(x = offset)
-                .background(background),
-        )
-    }
-}
-
-/**
- * 重复动画，rememberInfiniteTransition
- */
-@Composable
-fun Demo7() {
-    var change by remember { mutableStateOf(false) }
-    val infiniteTransition = rememberInfiniteTransition()
-    val alpha by infiniteTransition.animateFloat(
-        initialValue = 0f,
-        targetValue = 1f,
-        animationSpec = infiniteRepeatable(
-            animation = keyframes {
-                durationMillis = 1000
-                1f at 500
-            },
-            repeatMode = RepeatMode.Reverse
-        )
-    )
-    val background = if (change) Color.Gray else Color.Blue
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Text(text = "Kaliyaganj", modifier = Modifier.clickable { change = !change })
-        Text(
-            text = "coming soon",
-            modifier = Modifier
-                .size(100.dp)
-                .alpha(alpha)
-                .background(background),
-        )
-    }
-}
 
 @Composable
 fun Greeting() {
@@ -674,18 +453,14 @@ fun Greeting() {
 
         MouzaCards2()
 
-//        Demo7()
-//        LargeCard()
+        Text(text = " According to the West Bengal Land Reforms Act, one can buy a maximum of 24.5 acres of rainfed land and 17.5 acres of irrigated land",
+            fontSize = 16.sp,
+            fontFamily = FontFamily.SansSerif,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        )
 
-//        TableScreen()
-
-            Text(text = " According to the West Bengal Land Reforms Act, one can buy a maximum of 24.5 acres of rainfed land and 17.5 acres of irrigated land",
-                fontSize = 16.sp,
-                fontFamily = FontFamily.SansSerif,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-                )
     }
 }
 
