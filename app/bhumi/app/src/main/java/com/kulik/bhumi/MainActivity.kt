@@ -63,20 +63,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun RowScope.TableCell(
-    text: String,
-    weight: Float
-) {
-    Text(
-        text = text,
-        Modifier
-            .border(1.dp, Black)
-            .weight(weight)
-            .padding(8.dp)
-    )
-}
-
 class Mouza(name: String, code: String, sheets: List<String>) {
     val name = name
     val code = code
