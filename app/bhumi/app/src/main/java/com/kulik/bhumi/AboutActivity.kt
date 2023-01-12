@@ -46,6 +46,80 @@ fun About() {
     val context = LocalContext.current
 
     Column (verticalArrangement= Arrangement.SpaceBetween) {
+        Row(modifier = Modifier.fillMaxWidth().padding(10.dp), horizontalArrangement = Arrangement.Center) {
+            var count by remember { mutableStateOf(0) }
+            Button(onClick = {
+                context.startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=com.agrohi.kulik")
+                    )
+                )
+            }) {
+                Text("উত্তর বাংলা অ্যাপ")
+            }
+            AnimatedContent(
+                targetState = count,
+                transitionSpec = {
+                    // Compare the incoming number with the previous number.
+                    if (targetState > initialState) {
+                        // If the target number is larger, it slides up and fades in
+                        // while the initial (smaller) number slides up and fades out.
+                        slideInVertically { height -> height } + fadeIn() with
+                                slideOutVertically { height -> -height } + fadeOut()
+                    } else {
+                        // If the target number is smaller, it slides down and fades in
+                        // while the initial number slides down and fades out.
+                        slideInVertically { height -> -height } + fadeIn() with
+                                slideOutVertically { height -> height } + fadeOut()
+                    }.using(
+                        // Disable clipping since the faded slide-in/out should
+                        // be displayed out of bounds.
+                        SizeTransform(clip = false)
+                    )
+                }
+            ) { targetCount ->
+                Text(text = "$targetCount")
+            }
+        }
+
+        Row(modifier = Modifier.fillMaxWidth().padding(10.dp), horizontalArrangement = Arrangement.Center) {
+            var count by remember { mutableStateOf(0) }
+            Button(onClick = {
+                context.startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=com.kulik.bhumi")
+                    )
+                )
+            }) {
+                Text("rate this app")
+            }
+            AnimatedContent(
+                targetState = count,
+                transitionSpec = {
+                    // Compare the incoming number with the previous number.
+                    if (targetState > initialState) {
+                        // If the target number is larger, it slides up and fades in
+                        // while the initial (smaller) number slides up and fades out.
+                        slideInVertically { height -> height } + fadeIn() with
+                                slideOutVertically { height -> -height } + fadeOut()
+                    } else {
+                        // If the target number is smaller, it slides down and fades in
+                        // while the initial number slides down and fades out.
+                        slideInVertically { height -> -height } + fadeIn() with
+                                slideOutVertically { height -> height } + fadeOut()
+                    }.using(
+                        // Disable clipping since the faded slide-in/out should
+                        // be displayed out of bounds.
+                        SizeTransform(clip = false)
+                    )
+                }
+            ) { targetCount ->
+                Text(text = "$targetCount")
+            }
+        }
+
         var expanded by remember { mutableStateOf(false) }
         Surface(
             color = MaterialTheme.colors.primary,
@@ -87,42 +161,7 @@ fun About() {
             }
         }
 
-        Row {
-            var count by remember { mutableStateOf(0) }
-            Button(onClick = {
-                context.startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("market://details?id=com.kulik.bhumi")
-                    )
-                )
-            }) {
-                Text("উত্তর বাংলা অ্যাপ")
-            }
-            AnimatedContent(
-                targetState = count,
-                transitionSpec = {
-                    // Compare the incoming number with the previous number.
-                    if (targetState > initialState) {
-                        // If the target number is larger, it slides up and fades in
-                        // while the initial (smaller) number slides up and fades out.
-                        slideInVertically { height -> height } + fadeIn() with
-                                slideOutVertically { height -> -height } + fadeOut()
-                    } else {
-                        // If the target number is smaller, it slides down and fades in
-                        // while the initial number slides down and fades out.
-                        slideInVertically { height -> -height } + fadeIn() with
-                                slideOutVertically { height -> height } + fadeOut()
-                    }.using(
-                        // Disable clipping since the faded slide-in/out should
-                        // be displayed out of bounds.
-                        SizeTransform(clip = false)
-                    )
-                }
-            ) { targetCount ->
-                Text(text = "$targetCount")
-            }
-        }
+
     }
 }
 
