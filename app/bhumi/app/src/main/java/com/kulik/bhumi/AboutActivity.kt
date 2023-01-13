@@ -1,11 +1,14 @@
 package com.kulik.bhumi
 
+import android.animation.TimeInterpolator
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.animation.BounceInterpolator
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.*
+import androidx.compose.animation.core.Easing
 import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -46,6 +49,7 @@ class AboutActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun VisibilityAnimationSample(
     show : Boolean,
@@ -53,39 +57,162 @@ fun VisibilityAnimationSample(
 ){
 
     Column(
-//        modifier = Modifier
-//            .fillMaxSize(),
+        modifier = Modifier
+            .fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        if(show){
-            Box(
-                modifier = Modifier
-                    .size(50.dp)
-                    .clip(RoundedCornerShape(25.dp))
-                    .background(Color.Blue),
-                contentAlignment = Alignment.Center
+        Row(modifier = Modifier.fillMaxWidth()) {
+            AnimatedVisibility(
+                visible = show,
+                enter = scaleIn(
+                    animationSpec = tween(
+                        durationMillis = 1000,
+                        easing = BounceInterpolator().toEasing()
+                    )
+                ),
+                exit = scaleOut(animationSpec = tween(durationMillis = 1000))
             ) {
+                Box(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .padding(5.dp)
+                        .clip(RoundedCornerShape(25.dp))
+                        .background(Color.Blue),
+                    contentAlignment = Alignment.Center
+                ) {
 
-                Icon(
-                    imageVector = Icons.Default.Star,
-                    contentDescription = "Fab Button",
-                    tint = Color.White
-                )
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "Fab Button",
+                        tint = Color.White
+                    )
 
+                }
+            }
+            AnimatedVisibility(
+                visible = show,
+                enter = scaleIn(
+                    animationSpec = tween(
+                        durationMillis = 1000,
+                        easing = BounceInterpolator().toEasing()
+                    )
+                ),
+                exit = scaleOut(animationSpec = tween(durationMillis = 1000))
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .padding(5.dp)
+                        .clip(RoundedCornerShape(25.dp))
+                        .background(Color.Blue),
+                    contentAlignment = Alignment.Center
+                ) {
+
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "Fab Button",
+                        tint = Color.White
+                    )
+
+                }
+            }
+            AnimatedVisibility(
+                visible = show,
+                enter = scaleIn(
+                    animationSpec = tween(
+                        durationMillis = 1000,
+                        easing = BounceInterpolator().toEasing()
+                    )
+                ),
+                exit = scaleOut(animationSpec = tween(durationMillis = 1000))
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .padding(5.dp)
+                        .clip(RoundedCornerShape(25.dp))
+                        .background(Color.Blue),
+                    contentAlignment = Alignment.Center
+                ) {
+
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "Fab Button",
+                        tint = Color.White
+                    )
+
+                }
+            }
+            AnimatedVisibility(
+                visible = show,
+                enter = scaleIn(
+                    animationSpec = tween(
+                        durationMillis = 1000,
+                        easing = BounceInterpolator().toEasing()
+                    )
+                ),
+                exit = scaleOut(animationSpec = tween(durationMillis = 1000))
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .padding(5.dp)
+                        .clip(RoundedCornerShape(25.dp))
+                        .background(Color.Blue),
+                    contentAlignment = Alignment.Center
+                ) {
+
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "Fab Button",
+                        tint = Color.White
+                    )
+
+                }
+            }
+            AnimatedVisibility(
+                visible = show,
+                enter = scaleIn(
+                    animationSpec = tween(
+                        durationMillis = 1000,
+                        easing = BounceInterpolator().toEasing()
+                    )
+                ),
+                exit = scaleOut(animationSpec = tween(durationMillis = 1000))
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .padding(5.dp)
+                        .clip(RoundedCornerShape(25.dp))
+                        .background(Color.Blue),
+                    contentAlignment = Alignment.Center
+                ) {
+
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "Fab Button",
+                        tint = Color.White
+                    )
+
+                }
             }
         }
-
         Spacer(modifier = Modifier.height(25.dp))
 
         Button(
             onClick = { updateVisibility() }
         ) {
-            Text(text = if (show) "Hide" else "Show" )
+            Text(text = if (show) "Five Stars!" else "Rate" )
         }
     }
 
+}
+
+private fun TimeInterpolator.toEasing() = Easing {
+    x -> getInterpolation(x)
 }
 
 @OptIn(ExperimentalAnimationApi::class, ExperimentalMaterialApi::class)
@@ -98,11 +225,13 @@ fun About() {
         var showText by remember {
             mutableStateOf(true)
         }
-        AnimatedVisibility(visible = showText) {
+        Button(onClick = {}) {
             VisibilityAnimationSample(showText, { showText = !showText })
         }
 
-        Row(modifier = Modifier.fillMaxWidth().padding(10.dp), horizontalArrangement = Arrangement.Center) {
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp), horizontalArrangement = Arrangement.Center) {
             var count by remember { mutableStateOf(0) }
             Button(onClick = {
                 context.startActivity(
@@ -139,7 +268,9 @@ fun About() {
             }
         }
 
-        Row(modifier = Modifier.fillMaxWidth().padding(10.dp), horizontalArrangement = Arrangement.Center) {
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp), horizontalArrangement = Arrangement.Center) {
             var count by remember { mutableStateOf(0) }
             Button(onClick = {
                 context.startActivity(
