@@ -231,7 +231,8 @@ fun About() {
 
         Row(modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp), horizontalArrangement = Arrangement.Center) {
+            .padding(10.dp),
+            horizontalArrangement = Arrangement.Center) {
             var count by remember { mutableStateOf(0) }
             Button(onClick = {
                 context.startActivity(
@@ -264,7 +265,7 @@ fun About() {
                     )
                 }
             ) { targetCount ->
-                Text(text = "$targetCount")
+//                Text(text = "$targetCount")
             }
         }
 
@@ -303,7 +304,7 @@ fun About() {
                     )
                 }
             ) { targetCount ->
-                Text(text = "$targetCount")
+//                Text(text = "$targetCount")
             }
         }
 
