@@ -15,6 +15,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.ButtonDefaults.buttonColors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Info
@@ -25,12 +26,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kulik.bhumi.ui.theme.BhumiTheme
+import com.kulik.bhumi.ui.theme.Teal200
 
 class AboutActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -203,9 +206,10 @@ fun VisibilityAnimationSample(
         Spacer(modifier = Modifier.height(25.dp))
 
         Button(
-            onClick = { updateVisibility() }
+            onClick = { updateVisibility() },
+            colors = buttonColors(backgroundColor = Teal200)
         ) {
-            Text(text = if (show) "Five Stars!" else "Rate" )
+            Text(text = if (show) "Five Stars!" else "Rate", style = TextStyle(color = Color.Black) )
         }
     }
 
@@ -223,7 +227,7 @@ fun About() {
     Column (verticalArrangement= Arrangement.SpaceBetween) {
 
         var showText by remember {
-            mutableStateOf(true)
+            mutableStateOf(false)
         }
         Button(onClick = {}) {
             VisibilityAnimationSample(showText, { showText = !showText })
