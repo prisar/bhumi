@@ -8,13 +8,19 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.*
 import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,12 +46,62 @@ class AboutActivity : ComponentActivity() {
     }
 }
 
+@Composable
+fun VisibilityAnimationSample(
+    show : Boolean,
+    updateVisibility : () -> Unit
+){
+
+    Column(
+//        modifier = Modifier
+//            .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        if(show){
+            Box(
+                modifier = Modifier
+                    .size(50.dp)
+                    .clip(RoundedCornerShape(25.dp))
+                    .background(Color.Blue),
+                contentAlignment = Alignment.Center
+            ) {
+
+                Icon(
+                    imageVector = Icons.Default.Star,
+                    contentDescription = "Fab Button",
+                    tint = Color.White
+                )
+
+            }
+        }
+
+        Spacer(modifier = Modifier.height(25.dp))
+
+        Button(
+            onClick = { updateVisibility() }
+        ) {
+            Text(text = if (show) "Hide" else "Show" )
+        }
+    }
+
+}
+
 @OptIn(ExperimentalAnimationApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun About() {
     val context = LocalContext.current
 
     Column (verticalArrangement= Arrangement.SpaceBetween) {
+
+        var showText by remember {
+            mutableStateOf(true)
+        }
+        AnimatedVisibility(visible = showText) {
+            VisibilityAnimationSample(showText, { showText = !showText })
+        }
+
         Row(modifier = Modifier.fillMaxWidth().padding(10.dp), horizontalArrangement = Arrangement.Center) {
             var count by remember { mutableStateOf(0) }
             Button(onClick = {
