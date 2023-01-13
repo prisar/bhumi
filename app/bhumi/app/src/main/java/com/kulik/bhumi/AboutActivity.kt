@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kulik.bhumi.ui.theme.BhumiTheme
 import com.kulik.bhumi.ui.theme.Teal200
+import com.kulik.bhumi.ui.theme.Yellow
 
 class AboutActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -229,7 +230,7 @@ fun About() {
         var showText by remember {
             mutableStateOf(false)
         }
-        Button(onClick = {}) {
+        Row(modifier = Modifier.background(color = Yellow)) {
             VisibilityAnimationSample(showText, { showText = !showText })
         }
 
@@ -245,7 +246,7 @@ fun About() {
                         Uri.parse("market://details?id=com.agrohi.kulik")
                     )
                 )
-            }) {
+            }, colors = buttonColors(backgroundColor = Teal200)) {
                 Text("উত্তর বাংলা অ্যাপ")
             }
             AnimatedContent(
@@ -275,7 +276,8 @@ fun About() {
 
         Row(modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp), horizontalArrangement = Arrangement.Center) {
+            .padding(10.dp),
+            horizontalArrangement = Arrangement.Center) {
             var count by remember { mutableStateOf(0) }
             Button(onClick = {
                 context.startActivity(
@@ -284,7 +286,7 @@ fun About() {
                         Uri.parse("market://details?id=com.kulik.bhumi")
                     )
                 )
-            }) {
+            }, colors = buttonColors(backgroundColor = Teal200)) {
                 Text("rate this app")
             }
             AnimatedContent(
@@ -314,7 +316,7 @@ fun About() {
 
         var expanded by remember { mutableStateOf(false) }
         Surface(
-            color = MaterialTheme.colors.primary,
+            color = Teal200,
             onClick = { expanded = !expanded }
         ) {
             AnimatedContent(
