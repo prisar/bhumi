@@ -10,9 +10,9 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.horizontalDrag
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -73,16 +73,16 @@ class Mouza(name: String, code: String, sheets: List<String>) {
 @Composable
 fun MouzaCards() {
     val paddingModifier = Modifier.padding(5.dp)
-    val listData = listOf<Mouza>(
-        Mouza("madhupur_109", "109", sheets = listOf<String>("0")),
-        Mouza("basudebpur_115", "115", sheets = listOf<String>("0")),
-        Mouza("bhoria_118", "118", sheets = listOf<String>("0")),
-        Mouza("marikura_144", "144", sheets = listOf<String>("0")),
-        Mouza("rupahar_202", "202", sheets = listOf<String>("0")),
-        Mouza("sankarpur_113", "113", sheets = listOf<String>("0")),
-        Mouza("ekore_110", "110", sheets = listOf<String>("1", "2")),
-        Mouza("raiganj_150", "150", sheets = listOf<String>("01", "02", "03")),
-        Mouza("tenohari_143", "143", sheets = listOf<String>("1", "2")),
+    val listData = listOf(
+        Mouza("madhupur_109", "109", sheets = listOf("0")),
+        Mouza("basudebpur_115", "115", sheets = listOf("0")),
+        Mouza("bhoria_118", "118", sheets = listOf("0")),
+        Mouza("marikura_144", "144", sheets = listOf("0")),
+        Mouza("rupahar_202", "202", sheets = listOf("0")),
+        Mouza("sankarpur_113", "113", sheets = listOf("0")),
+        Mouza("ekore_110", "110", sheets = listOf("1", "2")),
+        Mouza("raiganj_150", "150", sheets = listOf("01", "02", "03")),
+        Mouza("tenohari_143", "143", sheets = listOf("1", "2")),
     )
     val context = LocalContext.current
 
@@ -101,7 +101,7 @@ fun MouzaCards() {
                 Text(text = "Select a sheet out of these ${dialogMouza.sheets.size}")
             },
             text = {
-                LazyVerticalGrid(cells = GridCells.Fixed(4)) {
+                LazyVerticalGrid(columns = GridCells.Fixed(4)) {
                     items(dialogMouza.sheets) {
                         Card(shape = RoundedCornerShape(20.dp),
                             elevation = 10.dp,
@@ -136,7 +136,7 @@ fun MouzaCards() {
         )
     }
 
-    LazyVerticalGrid(cells = GridCells.Fixed(2),
+    LazyVerticalGrid(columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp)) {
         items(listData) {
@@ -165,43 +165,43 @@ fun MouzaCards() {
 @Composable
 fun MouzaCards2() {
     val paddingModifier = Modifier.padding(5.dp)
-    val listData = listOf<Mouza>(
-        Mouza("dhamja_137", "109", sheets = listOf<String>("0")),
-        Mouza("chirail_102", "115", sheets = listOf<String>("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")),
-        Mouza("dhankoil_84", "118", sheets = listOf<String>("1", "2")),
-        Mouza("rashidpur_85", "144", sheets = listOf<String>("0")),
-        Mouza("mahadebpur_99", "202", sheets = listOf<String>("0")),
-        Mouza("ratun_123", "113", sheets = listOf<String>("0")),
-        Mouza("bhabanipur_75", "110", sheets = listOf<String>("1", "2")),
-        Mouza("araji_joydebpur_76", "150", sheets = listOf<String>("0")),
-        Mouza("laxmipur_27", "143", sheets = listOf<String>("0")),
-        Mouza("uttar_gouripur_64", "143", sheets = listOf<String>("0")),
-        Mouza("bochadanga_131", "143", sheets = listOf<String>("0")),
-        Mouza("doulatbati_26", "143", sheets = listOf<String>("0")),
-        Mouza("dalimgaon_31", "143", sheets = listOf<String>("1", "2")),
-        Mouza("chaklaxmi_32", "143", sheets = listOf<String>("0")),
-        Mouza("radhikapur_57", "143", sheets = listOf<String>("0")),
-        Mouza("uttar_krishnapur_55", "143", sheets = listOf<String>("1", "2")),
-        Mouza("gotgaon_56", "143", sheets = listOf<String>("0")),
-        Mouza("maheshpur_78", "143", sheets = listOf<String>("1", "2")),
-        Mouza("fatepur_135", "143", sheets = listOf<String>("1", "2")),
-        Mouza("haldibari_96", "143", sheets = listOf<String>("0")),
-        Mouza("hariharpur_86", "143", sheets = listOf<String>("0")),
-        Mouza("mirjapur_1", "143", sheets = listOf<String>("0")),
-        Mouza("uttar_durgapur_04", "143", sheets = listOf<String>("0")),
-        Mouza("kathandari_05", "143", sheets = listOf<String>("0")),
-        Mouza("bhurkutpara_06", "143", sheets = listOf<String>("0")),
-        Mouza("mirabati_07", "143", sheets = listOf<String>("0")),
-        Mouza("uttar_gouripur_08", "143", sheets = listOf<String>("0")),
-        Mouza("pachakandar_11", "143", sheets = listOf<String>("0")),
-        Mouza("buridangi_13", "143", sheets = listOf<String>("0")),
-        Mouza("batasan_14", "143", sheets = listOf<String>("0")),
-        Mouza("shankarpur_16", "143", sheets = listOf<String>("0")),
-        Mouza("uttar_laxmipur_17", "143", sheets = listOf<String>("0")),
-        Mouza("velai_20", "143", sheets = listOf<String>("0")),
-        Mouza("majlispur_104", "143", sheets = listOf<String>("0")),
-        Mouza("keotan_101", "143", sheets = listOf<String>("0")),
-        Mouza("lohatara_30", "143", sheets = listOf<String>("0")),
+    val listData = listOf(
+        Mouza("dhamja_137", "109", sheets = listOf("0")),
+        Mouza("chirail_102", "115", sheets = listOf("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")),
+        Mouza("dhankoil_84", "118", sheets = listOf("1", "2")),
+        Mouza("rashidpur_85", "144", sheets = listOf("0")),
+        Mouza("mahadebpur_99", "202", sheets = listOf("0")),
+        Mouza("ratun_123", "113", sheets = listOf("0")),
+        Mouza("bhabanipur_75", "110", sheets = listOf("1", "2")),
+        Mouza("araji_joydebpur_76", "150", sheets = listOf("0")),
+        Mouza("laxmipur_27", "143", sheets = listOf("0")),
+        Mouza("uttar_gouripur_64", "143", sheets = listOf("0")),
+        Mouza("bochadanga_131", "143", sheets = listOf("0")),
+        Mouza("doulatbati_26", "143", sheets = listOf("0")),
+        Mouza("dalimgaon_31", "143", sheets = listOf("1", "2")),
+        Mouza("chaklaxmi_32", "143", sheets = listOf("0")),
+        Mouza("radhikapur_57", "143", sheets = listOf("0")),
+        Mouza("uttar_krishnapur_55", "143", sheets = listOf("1", "2")),
+        Mouza("gotgaon_56", "143", sheets = listOf("0")),
+        Mouza("maheshpur_78", "143", sheets = listOf("1", "2")),
+        Mouza("fatepur_135", "143", sheets = listOf("1", "2")),
+        Mouza("haldibari_96", "143", sheets = listOf("0")),
+        Mouza("hariharpur_86", "143", sheets = listOf("0")),
+        Mouza("mirjapur_1", "143", sheets = listOf("0")),
+        Mouza("uttar_durgapur_04", "143", sheets = listOf("0")),
+        Mouza("kathandari_05", "143", sheets = listOf("0")),
+        Mouza("bhurkutpara_06", "143", sheets = listOf("0")),
+        Mouza("mirabati_07", "143", sheets = listOf("0")),
+        Mouza("uttar_gouripur_08", "143", sheets = listOf("0")),
+        Mouza("pachakandar_11", "143", sheets = listOf("0")),
+        Mouza("buridangi_13", "143", sheets = listOf("0")),
+        Mouza("batasan_14", "143", sheets = listOf("0")),
+        Mouza("shankarpur_16", "143", sheets = listOf("0")),
+        Mouza("uttar_laxmipur_17", "143", sheets = listOf("0")),
+        Mouza("velai_20", "143", sheets = listOf("0")),
+        Mouza("majlispur_104", "143", sheets = listOf("0")),
+        Mouza("keotan_101", "143", sheets = listOf("0")),
+        Mouza("lohatara_30", "143", sheets = listOf("0")),
 
 
     )
@@ -221,7 +221,7 @@ fun MouzaCards2() {
                 Text(text = "Select a sheet out of these ${dialogMouza.sheets.size}")
             },
             text = {
-                LazyVerticalGrid(cells = GridCells.Fixed(4)) {
+                LazyVerticalGrid(columns = GridCells.Fixed(4)) {
                     items(dialogMouza.sheets) {
                         Card(shape = RoundedCornerShape(20.dp),
                             elevation = 10.dp,
@@ -256,7 +256,7 @@ fun MouzaCards2() {
         )
     }
 
-    LazyVerticalGrid(cells = GridCells.Fixed(2),
+    LazyVerticalGrid(columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp)) {
         items(listData) {
