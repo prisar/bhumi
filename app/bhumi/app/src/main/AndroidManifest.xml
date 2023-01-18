@@ -15,6 +15,11 @@
         android:theme="@style/Theme.Bhumi"
         tools:targetApi="33">
         <activity
+            android:name=".MeasureActivity"
+            android:exported="false"
+            android:label="@string/title_activity_measure"
+            android:theme="@style/Theme.Bhumi" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"

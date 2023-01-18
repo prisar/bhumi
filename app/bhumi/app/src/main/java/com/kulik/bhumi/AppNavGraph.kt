@@ -22,6 +22,7 @@ import androidx.navigation.compose.rememberNavController
 sealed class Screen(val route: String, @StringRes val resourceId: Int) {
     object About : Screen("about", R.string.about)
     object Main : Screen("main", R.string.main)
+    object Measure : Screen("measure", R.string.about)
 }
 
 @Composable
@@ -31,6 +32,7 @@ fun AppNavGraph(
 
     val items = listOf(
         Screen.Main,
+        Screen.Measure,
         Screen.About,
     )
 
@@ -67,6 +69,7 @@ fun AppNavGraph(
     ) { innerPadding ->
         NavHost(navController, startDestination = Screen.Main.route, Modifier.padding(innerPadding)) {
             composable(Screen.Main.route) { Home()  }
+            composable(Screen.Measure.route) { Measure() }
             composable(Screen.About.route) { AboutScreen(
                 onNavigateToAbout = { navController.navigate("About") },
                 /*...*/
