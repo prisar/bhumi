@@ -403,11 +403,11 @@ fun About() {
                 context.startActivity(
                     Intent(
                         Intent.ACTION_VIEW,
-                        Uri.parse("market://details?id=com.kulik.calender")
+                        Uri.parse("market://details?id=com.kulik.calendar")
                     )
                 )
             }, colors = buttonColors(backgroundColor = Teal200)) {
-                Text("learn english")
+                Text("calendar")
             }
             AnimatedContent(
                 targetState = count,
