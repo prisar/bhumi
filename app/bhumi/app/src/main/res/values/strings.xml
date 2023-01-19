@@ -7,4 +7,7 @@
     <string name="main">Main</string>
     <string name="measure">Measure</string>
     <string name="title_activity_measure">MeasureActivity</string>
+    <string name="title_activity_raiganj">RaiganjActivity</string>
+    <string name="title_activity_kaliyaganj">KaliyaganjActivity</string>
+    <string name="title_activity_radhikapur">RadhikapurActivity</string>
 </resources>

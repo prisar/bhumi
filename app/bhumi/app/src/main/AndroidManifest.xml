@@ -15,6 +15,21 @@
         android:theme="@style/Theme.Bhumi"
         tools:targetApi="33">
         <activity
+            android:name=".RadhikapurActivity"
+            android:exported="false"
+            android:label="@string/title_activity_radhikapur"
+            android:theme="@style/Theme.Bhumi" />
+        <activity
+            android:name=".KaliyaganjActivity"
+            android:exported="false"
+            android:label="@string/title_activity_kaliyaganj"
+            android:theme="@style/Theme.Bhumi" />
+        <activity
+            android:name=".RaiganjActivity"
+            android:exported="false"
+            android:label="@string/title_activity_raiganj"
+            android:theme="@style/Theme.Bhumi" />
+        <activity
             android:name=".MeasureActivity"
             android:exported="false"
             android:label="@string/title_activity_measure"
