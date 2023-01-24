@@ -52,7 +52,13 @@ fun Measure() {
         Text(text = "1 acre = 0.4 hector", style = TextStyle(fontSize = 16.sp))
         Text(text = "1 katha = 5 shatak", style = TextStyle(fontSize = 16.sp))
 
+        Text(text = "Items i.e., kher 🌾", style = TextStyle(fontSize = 16.sp, textDecoration = TextDecoration.Underline))
         Text(text = "1 kahon = 16 pon", style = TextStyle(fontSize = 16.sp))
+
+        Text(text = "Weight", style = TextStyle(fontSize = 16.sp, textDecoration = TextDecoration.Underline))
+        Text(text = "1 mon = 5 dhara", style = TextStyle(fontSize = 16.sp))
+        Text(text = "1 quintal = 100 kg", style = TextStyle(fontSize = 16.sp))
+        Text(text = "1 ton = 1000 kg", style = TextStyle(fontSize = 16.sp))
 
         Divider(
             color = Purple200,
@@ -66,8 +72,8 @@ fun Measure() {
         Text(text = "dalimgaon rail stn - 2.5 km", style = TextStyle(fontSize = 16.sp))
         Text(text = "radhikapur rail stn - 9.5 km ", style = TextStyle(fontSize = 16.sp))
         Text(text = "kaliyaganj rail stn - 10.2 km ", style = TextStyle(fontSize = 16.sp))
-        Text(text = "dhankoil (state highway 10) - 7.6 kms ", style = TextStyle(fontSize = 16.sp))
-        Text(text = "buniyadpur (NH510) - 31 kms ", style = TextStyle(fontSize = 16.sp))
+        Text(text = "dhankoil (state highway 10A) - 7.6 kms ", style = TextStyle(fontSize = 16.sp))
+        Text(text = "buniyadpur (NH512) - 31 kms ", style = TextStyle(fontSize = 16.sp))
         Text(text = "itahar bus stand - 37.5 kms ", style = TextStyle(fontSize = 16.sp))
         Text(text = "durgapur in raiganj (NH12) - 33 kms ", style = TextStyle(fontSize = 16.sp))
         Text(text = "siliguri more in raiganj - 33.6 kms ", style = TextStyle(fontSize = 16.sp))
