@@ -32,6 +32,10 @@ class RadhikapurActivity : ComponentActivity() {
 @Composable
 fun Greeting4(name: String) {
     Text(text = "Radhikapur railway station is a station serving Radhikapur in the Uttar Dinajpur district, West Bengal, India. It is an active rail transit system on the Bangladesh–India border. ")
+    Text(text = "Trade volume in radhikapur railway transport is around 80 crores. It has increased significantly since 2017 and is expected to cross 200 crores in comming years.")
+    Text(text = "General Manager of NFR has publicly told that the station's infrastructure like platform, canteen, parking will be improved. And there is a possiblity of connecting via passenger trains. Both side of the border share same culture, so it will defintely give a boost to local comminity.")
+    Text(text = "Locals have also demanded for addition more trains especially the discontinued delhi and a train to south india.")
+    Text(text = "Radhikapur has gattered tremendous attention in recent years. Every days flocks of people from towns come to visit which only a decade ago was totaly neglected.")
 }
 
 @Preview(showBackground = true)
