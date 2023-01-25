@@ -53,12 +53,17 @@ fun Measure() {
         Text(text = "1 katha = 5 shatak", style = TextStyle(fontSize = 16.sp))
 
         Text(text = "Items i.e., kher 🌾", style = TextStyle(fontSize = 16.sp, textDecoration = TextDecoration.Underline))
+        Text(text = "1 ganda = 4 tar", style = TextStyle(fontSize = 16.sp))
+        Text(text = "1 pon = 20 ganda", style = TextStyle(fontSize = 16.sp))
         Text(text = "1 kahon = 16 pon", style = TextStyle(fontSize = 16.sp))
+        Text(text = "1 kahon = 1360 rupees (2023 rate)", style = TextStyle(fontSize = 16.sp))
+
         Text(text = "16 anna = 1 rupee", style = TextStyle(fontSize = 16.sp))
 
         Text(text = "Weight", style = TextStyle(fontSize = 16.sp, textDecoration = TextDecoration.Underline))
-        Text(text = "1 mon = 16 dhara", style = TextStyle(fontSize = 16.sp))
+        Text(text = "1 mon = 20 dhara", style = TextStyle(fontSize = 16.sp))
         Text(text = "1 dhara = 5 kg", style = TextStyle(fontSize = 16.sp))
+        Text(text = "1 mon = 700 rupees (2023 rate)", style = TextStyle(fontSize = 16.sp))
         Text(text = "1 quintal = 100 kg", style = TextStyle(fontSize = 16.sp))
         Text(text = "1 ton = 1000 kg", style = TextStyle(fontSize = 16.sp))
 
