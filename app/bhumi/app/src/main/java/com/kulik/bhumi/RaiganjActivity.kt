@@ -36,6 +36,7 @@ class RaiganjActivity : ComponentActivity() {
 fun Greeting(name: String) {
     Column(modifier = Modifier.padding(10.dp)) {
         Text(text = "The town of Raiganj situated in the narrow strip which joins the Northern and Southern portion of the state of West Bengal, has come up in prominence as a result of partition of India. This town in pre-partition was a small village dependent upon the larger urban centers. The partition of Bengal has suddenly left this town on its own. Other such villages have either shifted their dependence to other town in the state of West Bengal or have started growing themselves. The town of Raiganj belongs to other category. It was merely a mouja under Dinajpur Maharaja Administration and was Bandar meaning a river based hald post of merchentile commodities from far and near village.In pre-independence  days this was rather a neglected area. In 1951 immediately after independence the town barely had a population of 17000 persons. Since then this town has grown up faster.")
+        Text(text = "Work is going on for an over bridge!")
     }
 }
 
