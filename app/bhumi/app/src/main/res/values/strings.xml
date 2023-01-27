@@ -10,4 +10,5 @@
     <string name="title_activity_raiganj">RaiganjActivity</string>
     <string name="title_activity_kaliyaganj">KaliyaganjActivity</string>
     <string name="title_activity_radhikapur">RadhikapurActivity</string>
+    <string name="title_activity_industry">IndustryActivity</string>
 </resources>

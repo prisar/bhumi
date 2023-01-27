@@ -283,50 +283,6 @@ fun MouzaCards2() {
 
 
 /*
-* blog
-* https://www.valueof.io/blog/animation-compose-api-summary
-*
- */
-
-@Composable
-fun LargeCard(){
-    val cardModifier  = Modifier
-        .padding(16.dp)
-        .fillMaxWidth()
-        .height(50.dp)
-    Card(elevation = 10.dp, modifier = cardModifier) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            var visible by remember { mutableStateOf(true) }
-            val density = LocalDensity.current
-            AnimatedVisibility(
-                visible = visible,
-                enter = slideInVertically {
-                    // Slide in from 40 dp from the top.
-                    with(density) { -40.dp.roundToPx() }
-                } + expandVertically(
-                    // Expand from the top.
-                    expandFrom = Alignment.Top
-                ) + fadeIn(
-                    // Fade in with the initial alpha of 0.3f.
-                    initialAlpha = 0.3f
-                ),
-                exit = slideOutVertically() + shrinkVertically() + fadeOut()
-            ) {
-                Text("Hello",
-                    Modifier
-                        .fillMaxWidth()
-                        .height(200.dp))
-            }
-        }
-    }
-}
-
-
-/*
  * code from
  * https://github.com/yaoxiawen/ComposeAnimationDemo/blob/master/app/src/main/java/com/example/composeanimationdemo/Demo1.kt
 */

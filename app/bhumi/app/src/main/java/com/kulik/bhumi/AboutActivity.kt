@@ -444,7 +444,7 @@ fun About() {
                     Intent(context, RaiganjActivity::class.java)
                 )
             }, colors = buttonColors(backgroundColor = Teal200)) {
-                Text("Raiganj info")
+                Text("Raiganj")
             }
             AnimatedContent(
                 targetState = count,
@@ -481,7 +481,7 @@ fun About() {
                     Intent(context, KaliyaganjActivity::class.java)
                 )
             }, colors = buttonColors(backgroundColor = Teal200)) {
-                Text("Kaliyaganj info")
+                Text("Kaliyaganj")
             }
             AnimatedContent(
                 targetState = count,
@@ -518,7 +518,44 @@ fun About() {
                     Intent(context, RadhikapurActivity::class.java)
                 )
             }, colors = buttonColors(backgroundColor = Teal200)) {
-                Text("Radhikapur info")
+                Text("Radhikapur")
+            }
+            AnimatedContent(
+                targetState = count,
+                transitionSpec = {
+                    // Compare the incoming number with the previous number.
+                    if (targetState > initialState) {
+                        // If the target number is larger, it slides up and fades in
+                        // while the initial (smaller) number slides up and fades out.
+                        slideInVertically { height -> height } + fadeIn() with
+                                slideOutVertically { height -> -height } + fadeOut()
+                    } else {
+                        // If the target number is smaller, it slides down and fades in
+                        // while the initial number slides down and fades out.
+                        slideInVertically { height -> -height } + fadeIn() with
+                                slideOutVertically { height -> height } + fadeOut()
+                    }.using(
+                        // Disable clipping since the faded slide-in/out should
+                        // be displayed out of bounds.
+                        SizeTransform(clip = false)
+                    )
+                }
+            ) { targetCount ->
+//                Text(text = "$targetCount")
+            }
+        }
+
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp),
+            horizontalArrangement = Arrangement.Center) {
+            var count by remember { mutableStateOf(0) }
+            Button(onClick = {
+                context.startActivity(
+                    Intent(context, IndustryActivity::class.java)
+                )
+            }, colors = buttonColors(backgroundColor = Teal200)) {
+                Text("Industry")
             }
             AnimatedContent(
                 targetState = count,
