@@ -49,8 +49,9 @@ fun Measure() {
         Text(text = "Units of measurement", style = TextStyle(fontSize = 28.sp, textDecoration = TextDecoration.Underline))
 
         Text(text = "1 acre = 100 shatak", style = TextStyle(fontSize = 16.sp))
+        Text(text = "1 acre = 33 shatak", style = TextStyle(fontSize = 16.sp))
         Text(text = "1 acre = 0.4 hector", style = TextStyle(fontSize = 16.sp))
-        Text(text = "1 katha = 5 shatak", style = TextStyle(fontSize = 16.sp))
+        Text(text = "1 katha = 1.65 shatak", style = TextStyle(fontSize = 16.sp))
 
         Text(text = "Items i.e., kher 🌾", style = TextStyle(fontSize = 16.sp, textDecoration = TextDecoration.Underline))
         Text(text = "1 ganda = 4 tar", style = TextStyle(fontSize = 16.sp))
@@ -70,6 +71,8 @@ fun Measure() {
         Text(text = "1 pua = 0.25 liter", style = TextStyle(fontSize = 16.sp))
         Text(text = "1 sher = 4 pua", style = TextStyle(fontSize = 16.sp))
         Text(text = "1 sher = 1 Liter", style = TextStyle(fontSize = 16.sp))
+
+        Text(text = "1 bigha tej pata (yearly)= 41,000 rupees (2023 rate)", style = TextStyle(fontSize = 16.sp))
 
         Divider(
             color = Purple200,
