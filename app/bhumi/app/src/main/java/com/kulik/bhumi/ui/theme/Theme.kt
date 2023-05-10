@@ -30,7 +30,7 @@ private val LightColorPalette = lightColors(
 @Composable
 fun BhumiTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
-        DarkColorPalette
+        LightColorPalette // DarkColorPalette
     } else {
         LightColorPalette
     }
