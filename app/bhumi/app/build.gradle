@@ -5,14 +5,14 @@ plugins {
 
 android {
     namespace 'com.kulik.bhumi'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.kulik.bhumi"
         minSdk 21
-        targetSdk 33
-        versionCode 97
-        versionName "1.3.97"
+        targetSdk 34
+        versionCode 117
+        versionName "1.4.117"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
