@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -232,6 +233,23 @@ fun About() {
         }
         Row(modifier = Modifier.background(color = Yellow)) {
             VisibilityAnimationSample(showText, { showText = !showText })
+        }
+
+
+        Row(modifier = Modifier.padding(8.dp)) {
+            Column {
+                Text(
+                    text = "Important Disclaimer:",
+                    style = MaterialTheme.typography.h6.copy(fontWeight = FontWeight.Bold)
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = "This app is not affiliated with any government agency or authority. The information provided in this app is unofficial and sourced from publicly available data of West Bengal. Users are strongly advised to verify the accuracy of the information with official government sources for authenticity and official use.",
+                    style = MaterialTheme.typography.body1
+                )
+            }
         }
 
         Row(modifier = Modifier
